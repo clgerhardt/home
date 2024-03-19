@@ -3,8 +3,18 @@ import { useScrollPosition } from "../hooks/useScrollPosition";
 import useResizeObserver from "../hooks/useResizeObserver";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { mainBody, repos, about, skills } from "../editable-stuff/config.js";
-import { NavLink } from "./home/migration";
+import {
+  mainBody,
+  repos,
+  about,
+  skills,
+  computerGraphics,
+} from "../editable-stuff/config.js";
+import { NavLink as CustomNavLink } from "./home/migration";
+import Dropdown from "react-bootstrap/Dropdown";
+import NavLink from "react-bootstrap/NavLink";
+import NavItem from "react-bootstrap/NavItem";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Navigation = React.forwardRef((props, ref) => {
   // const { showBlog, FirstName } = config;
@@ -34,53 +44,69 @@ const Navigation = React.forwardRef((props, ref) => {
   return (
     <Navbar
       ref={navbarMenuRef}
-      className={`px-3 fixed-top  ${!isTop ? "navbar-white" : "navbar-transparent"
-        }`}
+      className={`px-3 fixed-top  ${
+        !isTop ? "navbar-white" : "navbar-transparent"
+      }`}
       expand="lg"
     >
-      <Navbar.Brand className="navbar-brand" href={process.env.PUBLIC_URL + "/#home"}>
+      <Navbar.Brand
+        className="navbar-brand"
+        href={process.env.PUBLIC_URL + "/"}
+      >
         {`<${mainBody.firstName} />`}
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="navbar-nav mr-auto">
           {/* {
-            <NavLink className="nav-item lead">
+            <CustomNavLink className="nav-item lead">
               <Link to={process.env.PUBLIC_URL + "/blog"}>Blog</Link>
-            </NavLink>
+            </CustomNavLink>
           } */}
           {repos.show && (
-
-            <NavLink
-              href={process.env.PUBLIC_URL + "/#projects"}
-            >
+            <CustomNavLink href={process.env.PUBLIC_URL + "/#projects"}>
               Projects
-            </NavLink>
+            </CustomNavLink>
           )}
-          <NavLink
+          <CustomNavLink
             className="nav-item lead"
             href={about.resume}
             target="_blank"
             rel="noreferrer noopener"
           >
             Resume
-          </NavLink>
+          </CustomNavLink>
           {about.show && (
-            <NavLink
+            <CustomNavLink
               className="nav-item lead"
               href={process.env.PUBLIC_URL + "/#aboutme"}
             >
               About
-            </NavLink>
+            </CustomNavLink>
           )}
           {skills.show && (
-            <NavLink
+            <CustomNavLink
               className="nav-item lead"
               href={process.env.PUBLIC_URL + "/#skills"}
             >
               Skills
-            </NavLink>
+            </CustomNavLink>
           )}
+          <NavDropdown
+            title="Cool stuff"
+            id="nav-dropdown"
+            className=" lead"
+          >
+            {computerGraphics.show && (
+              <NavDropdown.Item
+                className="nav-item lead"
+                href={process.env.PUBLIC_URL + "/#computer"}
+              >
+                {" "}
+                Computer Graphics
+              </NavDropdown.Item>
+            )}
+          </NavDropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

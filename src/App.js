@@ -23,6 +23,8 @@ import Leadership from "./components/home/Leadership.jsx";
 
 import Experience from "./components/home/Experience";
 
+import RenderHtml from "./components/ComputerGraphics/RenderHtml.jsx"
+
 const Home = React.forwardRef((props, ref) => {
   return (
     <>
@@ -55,6 +57,9 @@ const Home = React.forwardRef((props, ref) => {
           specfic={repos.specificRepos}
         />
       )}
+      {
+        <RenderHtml />
+      }
       {leadership.show && (
         <Leadership
           heading={leadership.heading}
@@ -83,6 +88,7 @@ const App = () => {
       {navBar.show && <Navbar ref={titleRef} />}
       <Routes>
         <Route path="/" exact element={<Home ref={titleRef} />} />
+        {/* <Route path="/#computer" exact element={<RenderHtml ref={titleRef}/>} /> */}
       </Routes>
       {/* {false && <Route path="/blog" exact component={Blog} />}
       {false && <Route path="/blog/:id" component={BlogPost} />} */}
